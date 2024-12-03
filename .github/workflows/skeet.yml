@@ -2,7 +2,7 @@ name: "Post to Bluesky"
 
 # on: workflow_dispatch
 on:
-  workflow_dispatch
+  workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
 
@@ -18,5 +18,5 @@ jobs:
         env:
           BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
           BSKY_PASSWORD: ${{ secrets.BSKY_PASSWORD }}
-          # ACTUALLY_SKEET: "false"
+          # ACTUALLY_SKEET: "true"
         run: devenv shell skeet

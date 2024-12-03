@@ -33,7 +33,7 @@ async function main() {
     console.log(`[${new Date().toISOString()}] ${skeet.text}`)
 }
 
-console.log(`[${new Date().toISOString()}] Booted up!`);
+console.log(`[${new Date().toISOString()}] Booted up, user is ${process.env.BLUESKY_USERNAME!}!`);
 
 main();
 

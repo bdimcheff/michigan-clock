@@ -55,7 +55,7 @@ async function main() {
         facets: skeet.facets,
         createdAt: new Date().toISOString(),
     };
-    if (process.env.ACTUALLY_SKEET) {
+    if (process.env.ACTUALLY_SKEET === 'true') {
         await agent.post(skeetRecord);
     }
     console.log(`[${new Date().toISOString()}] ${skeet.text}`);

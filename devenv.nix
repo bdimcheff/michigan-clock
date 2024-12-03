@@ -20,11 +20,6 @@
 
   # https://devenv.sh/scripts/
 
-  enterShell = ''
-    hello
-    git --version
-  '';
-
   # https://devenv.sh/tasks/
   tasks = {
     "node:setup".exec = "npm install";

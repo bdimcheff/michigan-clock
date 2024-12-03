@@ -19,9 +19,6 @@
   # services.postgres.enable = true;
 
   # https://devenv.sh/scripts/
-  scripts.hello.exec = ''
-    echo hello from $GREET
-  '';
 
   enterShell = ''
     hello
@@ -29,10 +26,17 @@
   '';
 
   # https://devenv.sh/tasks/
-  # tasks = {
-  #   "myproj:setup".exec = "mytool build";
-  #   "devenv:enterShell".after = [ "myproj:setup" ];
-  # };
+  tasks = {
+    "node:setup".exec = "npm install";
+    "ts:compile" = {
+      exec = "compile";
+      after = [ "node:setup" ];
+    };
+    "devenv:enterShell".after = [ "node:setup" "ts:compile" ];
+  };
+
+  scripts.skeet.exec = "node index.js";
+  scripts.compile.exec = "npx tsc";
 
   # https://devenv.sh/tests/
   enterTest = ''

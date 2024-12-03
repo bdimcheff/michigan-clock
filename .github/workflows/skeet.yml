@@ -1,0 +1,22 @@
+name: "Post to Bluesky"
+
+# on: workflow_dispatch
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - name: Install devenv.sh
+        run: nix profile install nixpkgs#devenv
+      - name: Run the skeet command
+        env:
+          BSKY_HANDLE: ${{ secrets.BSKY_HANDLE }}
+          BSKY_PASSWORD: ${{ secrets.BSKY_PASSWORD }}
+          # ACTUALLY_SKEET: "true"
+        run: devenv shell skeet

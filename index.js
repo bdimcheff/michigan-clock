@@ -35,7 +35,6 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const api_1 = require("@atproto/api");
 const dotenv = __importStar(require("dotenv"));
-const cron_1 = require("cron");
 const process = __importStar(require("process"));
 dotenv.config();
 // Create a Bluesky Agent
@@ -56,13 +55,15 @@ async function main() {
         facets: skeet.facets,
         createdAt: new Date().toISOString(),
     };
-    // await agent.post(skeetRecord);
-    console.log("Just skeeted!");
-    console.log(skeet.text);
+    if (process.env.ACTUALLY_SKEET) {
+        await agent.post(skeetRecord);
+    }
+    console.log(`[${new Date().toISOString()}] ${skeet.text}`);
 }
+console.log(`[${new Date().toISOString()}] Booted up!`);
 main();
 // Run this on a cron job
-const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
-const scheduleExpression = '0 9 * * *'; // Run at 9am in prod
-const job = new cron_1.CronJob(scheduleExpression, main); // change to scheduleExpressionMinute for testing
-job.start();
+// const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
+// const scheduleExpression = '0 8 * * *'; // Run at 8am irl
+// const job = new CronJob(scheduleExpression, main); // change to scheduleExpressionMinute for testing
+// job.start();

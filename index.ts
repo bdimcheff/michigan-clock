@@ -27,18 +27,21 @@ async function main() {
         facets: skeet.facets,
         createdAt: new Date().toISOString(),
     }
-    // await agent.post(skeetRecord);
-    console.log("Just skeeted!")
-    console.log(skeet.text)
+    if (process.env.ACTUALLY_SKEET === 'true') {
+        await agent.post(skeetRecord);
+    }
+    console.log(`[${new Date().toISOString()}] ${skeet.text}`)
 }
 
-// main();
+console.log(`[${new Date().toISOString()}] Booted up!`);
+
+main();
 
 
 // Run this on a cron job
-const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
-const scheduleExpression = '0 9 * * *'; // Run at 9am irl
+// const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
+// const scheduleExpression = '0 8 * * *'; // Run at 8am irl
 
-const job = new CronJob(scheduleExpression, main); // change to scheduleExpressionMinute for testing
+// const job = new CronJob(scheduleExpression, main); // change to scheduleExpressionMinute for testing
 
-job.start();
+// job.start();

@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# environment variable files
+.env# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+
+.env

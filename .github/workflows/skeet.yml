@@ -19,4 +19,4 @@ jobs:
           BLUESKY_USERNAME: ${{ vars.BLUESKY_USERNAME }}
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
           # ACTUALLY_SKEET: "true"
-        run: echo $BLUESKY_USERNAME && devenv shell skeet
+        run: devenv shell skeet
